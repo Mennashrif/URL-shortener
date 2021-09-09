@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,11 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionComponent {
   URl = ""
-  totalAngularPackages = []
-
-  constructor(private http: HttpClient) { }
   onKeyUp() {
- 
+    console.log(this.URl)
   }
 
 }

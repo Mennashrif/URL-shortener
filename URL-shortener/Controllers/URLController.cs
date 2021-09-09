@@ -8,32 +8,20 @@ using URL_shortener.Models;
 
 namespace URL_shortener.Controllers
 {
-    [ApiController]
-    [Route("api/Urls")]
     public class URLController : Controller
 
     {
         private UserDbContext context;
-
         public URLController()
         {
             context = new UserDbContext();
         }
-
-        //[HttpPost]
-        ////[Route("api/[UrlShortener/Add/{LongUrl}]")]
-        //public URL CreateUrl(URL url) { 
-     
-        //    context.Urlshortener.Add(url);
-        //    context.SaveChanges();
-        //    return url;
-            
-        //}
-        /*[HttpGet]
-        //GET/api/Urls
-        public IEnumerable<URL> GetUrl()
+        [Route("UrlShortener/Add/{LongUrl}")]
+        public IActionResult Add(string LongUrl)
         {
-            return context.Urlshortener.ToList();
-        }*/
+            var url = new URL();
+            context.Urlshortener.Add(url);
+            return View();
+        }
     }
 }
