@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using URL_shortener.Data;
-using URL_shortener.Data.Migrations;
 using URL_shortener.Models;
 
 namespace URL_shortener
@@ -30,7 +29,6 @@ namespace URL_shortener
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -72,7 +70,7 @@ namespace URL_shortener
             }
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();

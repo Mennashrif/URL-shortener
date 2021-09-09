@@ -8,6 +8,5 @@ namespace URL_shortener.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        
     }
 }
