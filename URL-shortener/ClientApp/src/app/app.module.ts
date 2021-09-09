@@ -16,7 +16,7 @@ import { SectionComponent } from './section/section.component';
     AppComponent,
     HeaderComponent,
     SectionComponent,
-
+    HttpClientModule
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
