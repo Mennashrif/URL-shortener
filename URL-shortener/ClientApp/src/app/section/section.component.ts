@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.css']
 })
-export class SectionComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+export class SectionComponent {
+  URl = ""
+  onKeyUp() {
+    console.log(this.URl)
   }
 
 }
