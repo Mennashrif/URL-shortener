@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using URL_shortener.Data.Migrations;
 using URL_shortener.Models;
+using URL_shortener.NewFolder;
 
 namespace URL_shortener.Controllers
 {
@@ -15,29 +16,32 @@ namespace URL_shortener.Controllers
 
     {
         private UserDbContext context;
+        private readonly IRandomURL _randomURL;
 
-        public URLController()
+        public URLController(IRandomURL randomURL)
         {
             context = new UserDbContext();
+            _randomURL = randomURL;
         }
 
-        //[HttpPost]
-        ////[Route("api/[UrlShortener/Add/{LongUrl}]")]
-        //public URL CreateUrl(URL url)
-        //{
-
-        //    context.Urlshortener.Add(url);
-        //    context.SaveChanges();
-        //    return url;
-
-        //}
+     
         [HttpPost]
         //GET/api/Urls
         public string GetUrl(URL url)
         {
-           
-            return '"'+context.Urlshortener.Where(u => u.longUrl == url.longUrl).ToList()[0].shortUrl+'"';
-            
+            if (url.longUrl != "")
+            {
+                var R = new RandomURL();
+                url.shortUrl = "https://localhost:44392/" + R.GetURL();
+                context.Urlshortener.Add(url);
+                context.SaveChanges();
+                return '"' + url.shortUrl + '"';
+            }
+            else
+            {
+                url.longUrl = context.Urlshortener.Where(u => u.shortUrl == "https://localhost:44392/"+url.shortUrl).ToList()[0].longUrl;
+                return '"' + url.longUrl + '"';
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { URL } from '../url'
 @Component({
   selector: 'app-section',
   templateUrl: './section.component.html',
@@ -25,13 +25,6 @@ export class SectionComponent {
     })
     
   }
-  goToLink() {
-    window.open(this.UrlShortener, "_blank");
-  }
+  
 
-}
-class URL {
-  id: number=0;
-  longUrl: string="";
-  shortUrl: string="";
 }
