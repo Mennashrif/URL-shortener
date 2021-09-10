@@ -18,7 +18,6 @@ import { RedirComponent } from './redir/redir.component';
     AppComponent,
     HeaderComponent,
     SectionComponent,
-    RedirComponent,
 
   ],
   imports: [
@@ -27,7 +26,7 @@ import { RedirComponent } from './redir/redir.component';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
- 
+
       {
         path: '',
         component: SectionComponent
@@ -35,13 +34,16 @@ import { RedirComponent } from './redir/redir.component';
 
       {
         path: ':shortUrl',
-        component: RedirComponent
+        canActivate: [RedirComponent],
+        component: RedirComponent,
+        
       },
 
     ])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    RedirComponent
   ],
   bootstrap: [AppComponent]
 })

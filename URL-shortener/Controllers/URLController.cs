@@ -39,7 +39,7 @@ namespace URL_shortener.Controllers
             }
             else
             {
-                url.longUrl = context.Urlshortener.Where(u => u.shortUrl == "https://localhost:44392/"+url.shortUrl).ToList()[0].longUrl;
+                url.longUrl = context.Urlshortener.Where(u => u.shortUrl == url.shortUrl).ToList()[0].longUrl;
                 return '"' + url.longUrl + '"';
             }
         }

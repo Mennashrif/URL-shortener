@@ -1,34 +1,33 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { SectionComponent } from '../section/section.component';
 import { URL } from '../url'
 
-@Component({
-  selector: 'app-redir',
-  templateUrl: './redir.component.html',
-  styleUrls: ['./redir.component.css']
+@Injectable({
+  providedIn: SectionComponent,
 })
-export class RedirComponent implements OnInit {
+export class RedirComponent implements CanActivate  {
   shortUrl = ""
   url = new URL;
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
-
-  ngOnInit() {
-    
-
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      }
+     
+          this.url.shortUrl = window.location.href;
+          this.http.post<any>('https://localhost:44392/api/Urls', JSON.stringify(this.url), httpOptions).subscribe(data => {
+            window.location.href = data;
+            return false;
+          },
+            error => {
+              return false;
+ 
+            })
+        
+      return false;
     }
-    this.route.paramMap
-      .subscribe(params => {
-        this.shortUrl = params.get("shortUrl");
-        this.url.shortUrl = this.shortUrl;
-        this.http.post<any>('https://localhost:44392/api/Urls', JSON.stringify(this.url), httpOptions).subscribe(data => {
-          window.location.href = data;
-          
-        })
-      })
-    
-  }
+    }
 
-}
