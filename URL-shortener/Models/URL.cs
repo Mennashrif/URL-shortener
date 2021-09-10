@@ -7,8 +7,8 @@ namespace URL_shortener.Models
 {
     public class URL
     {
-        public int Id { get; set; } 
-        public string LongUrl { get; set; }
-        public string ShortUrl { get; set; }
+        public int id { get; set; }
+        public string longUrl { get; set; }
+        public string shortUrl { get; set; }
     }
 }

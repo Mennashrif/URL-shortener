@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section.component.css']
 })
 export class SectionComponent {
-  URl = ""
+  URl = "";
+  UrlShortener = "";
+  url = new URL;
+  constructor(private http: HttpClient) {
+  }
   onKeyUp() {
-    console.log(this.URl)
+    this.url.longUrl = this.URl;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }
+    console.log(JSON.stringify( this.url));
+    
+    this.http.post<any>('https://localhost:44392/api/Urls', JSON.stringify(this.url) ,httpOptions).subscribe(data => {
+      this.UrlShortener = data;
+    })
+    
+  }
+  goToLink() {
+    window.open(this.UrlShortener, "_blank");
   }
 
+}
+class URL {
+  id: number=0;
+  longUrl: string="";
+  shortUrl: string="";
 }
