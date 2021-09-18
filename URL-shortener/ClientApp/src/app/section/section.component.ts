@@ -10,6 +10,7 @@ export class SectionComponent {
   URl = "";
   UrlShortener = "";
   url = new URL;
+
   constructor(private http: HttpClient) {
   }
   onKeyUp() {

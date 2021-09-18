@@ -6,7 +6,7 @@ import { SectionComponent } from '../section/section.component';
 import { URL } from '../url'
 
 @Injectable({
-  providedIn: SectionComponent,
+  providedIn: 'root',
 })
 export class RedirComponent implements CanActivate  {
   shortUrl = ""

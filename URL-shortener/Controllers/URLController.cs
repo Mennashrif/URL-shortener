@@ -27,7 +27,7 @@ namespace URL_shortener.Controllers
      
         [HttpPost]
         //GET/api/Urls
-        public string GetUrl(URL url)
+        public string CreatUrl(URL url)
         {
             if (url.longUrl != "")
             {
